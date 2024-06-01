@@ -56,3 +56,12 @@ LEFT JOIN
     Inventarios i ON c.id_comic = i.id_comic
 ORDER BY 
     c.nombre;
+
+
+select cl.nombre as 'Cliente', c.id_compra as 'Compra', cs.nombre as 'Comic', 
+cc.cantidad as 'Cantidad', i.cantidad_disponible as 'En Inventario'
+from Inventario i
+join Comics cs on i.id_comic = cs.id_comic
+left join Comic_Compras cc on cc.id_comic = cs.id_comic
+left join Compras c on c.id_compra = cc.id_compra
+join Clientes cl on cl.id_cliente = c.id_cliente
