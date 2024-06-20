@@ -108,6 +108,7 @@ END
 print ('Aqui continua el flujo')
 */
 
+/*
 declare @contador int = 0
 
 WHILE @contador <= 10
@@ -129,3 +130,23 @@ END CATCH
 
 print ('soy otra consulta')
 print ('yo tambien')
+*/
+
+--CASE
+
+declare @valor int
+declare @resultado char(10) = ''
+set @valor = 30
+
+set @resultado = (CASE WHEN @valor = 10 THEN 'ROJO'
+					   WHEN @valor = 20 THEN 'MORADO'
+					   WHEN @valor = 30 THEN 'AZUL'
+					   ELSE 'GRIS'
+					   END)
+print @resultado
+
+select * , (CASE WHEN disponibilidad=1 THEN 'VERDE'
+			     WHEN disponibilidad=0 THEN 'ROJO'
+				 ELSE'NEGRO'
+				 END) AS INDICADOR
+				 FROM Inventario
