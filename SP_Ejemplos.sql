@@ -43,8 +43,8 @@ exec sp_ObtenerHistorial 5
 
 --Insertar peliculas
 CREATE PROCEDURE sp_InsertarTablas 
-	@Titulo NVARCHAR,
-	@Genero NVARCHAR,
+	@Titulo NVARCHAR (100),
+	@Genero NVARCHAR (50),
 	@Fecha_estreno DATE
 AS
 BEGIN
@@ -53,4 +53,6 @@ BEGIN
 
 END
 
-EXEC sp_InsertarTablas 'Intensamente 2', 'Infantil', '2023-06-13'
+EXEC sp_InsertarTablas @Titulo='Intensamente 2',@Genero = 'Infantil', @Fecha_estreno ='2023-06-13'
+
+SELECT * FROM Peliculas
