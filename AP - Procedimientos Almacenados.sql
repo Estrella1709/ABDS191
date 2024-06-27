@@ -69,3 +69,22 @@ END
 EXEC sp_UsuarioTipoSuscripcion @Tipo = 'Anual'
 EXEC sp_UsuarioTipoSuscripcion @Tipo = 'Mensual'
 	
+
+/*Consultar usuario por medio de genero de pelicula*/
+CREATE PROCEDURE sp_ConsultarUsuariosPorGenero
+    @Genero NVARCHAR(50)
+AS
+BEGIN
+    SELECT u.UsuarioID, u.Nombre, p.PeliculaID, p.Titulo, p.Genero, hv.FechaVisualizacion
+    FROM Peliculas p
+    INNER JOIN HistorialVisualizacion hv ON p.PeliculaID = hv.PeliculaID
+    INNER JOIN Usuarios u ON hv.UsuarioID = u.UsuarioID
+    WHERE p.Genero = @Genero;
+END
+
+EXEC sp_ConsultarUsuariosPorGenero @Genero = 'Acción';
+EXEC sp_ConsultarUsuariosPorGenero @Genero = 'Drama';
+EXEC sp_ConsultarUsuariosPorGenero @Genero = 'Crimen';
+EXEC sp_ConsultarUsuariosPorGenero @Genero = 'Ciencia Ficción';
+EXEC sp_ConsultarUsuariosPorGenero @Genero = 'Fantasía';
+
