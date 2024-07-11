@@ -237,6 +237,3 @@ EXEC sp_eliminarAsociacionYMedidas @association_id = 5;
 Select * from associations
 
 
-
-
-
