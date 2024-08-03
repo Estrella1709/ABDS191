@@ -1,14 +1,14 @@
--->Trigger que se active cada que se crea una tabla en la BD
+--Trigger que se active cada que se crea una tabla en la BD
 CREATE TRIGGER Trigger_CrearTabla
 ON DATABASE
 FOR CREATE_TABLE
 AS
 BEGIN
-    PRINT 'Se ha creado una nueva tabla en DBBANK.';
+    PRINT 'Se ha creado una nueva tabla en DBBank.';
 END;
 
 
--->Crear dos tablas nuevas para comprobar el trigger
+--Prueba de trigger, creando dos tablas
 CREATE TABLE Prestamos (
 	PrestamoID INT IDENTITY(1,1) PRIMARY KEY,
 	ClienteID INT,
@@ -27,7 +27,8 @@ CREATE TABLE PagosPrestamos(
 	FOREIGN KEY (PrestamoID) REFERENCES Prestamos(PrestamoID)
 );
 
--->3 registros para cada tabla
+
+--Agregar tres registros para cada tabla
 INSERT INTO Prestamos (ClienteID, Monto, TasaInteres, FechaInicio, FechaFin) VALUES
 (1, 10000.00, 5.00, '2023-01-01', '2025-01-01'),
 (2, 20000.00, 4.50, '2023-02-15', '2026-02-15'),
@@ -40,17 +41,17 @@ INSERT INTO PagosPrestamos (PrestamoID, MontoPagado, FechaPago) VALUES
 
 
 --Trigger que se activa cada que se crea un SP
-CREATE TRIGGER DDLTrigger_CreateProcedure
+CREATE TRIGGER DDLTrigger_CrearProcedimiento
 ON DATABASE
 FOR CREATE_PROCEDURE
 AS
 BEGIN
-    PRINT 'Se ha creado un Nuevo Procedimiento en DBBANK.'
+    PRINT 'Se ha creado un Nuevo Procedimiento en DBBank.'
 END;
 
 
 
---SP para ingresar un nuevo prestamo a un usuario ya registrado y que tambien se ingrese el primer pago
+--Procedimiento para ingresar un nuevo prestamo a un usuario ya registrado y que tambien se ingrese el primer pago
 CREATE PROCEDURE IngresarPrestamoPrimerPago
     @ClienteID INT,
     @Monto DECIMAL(18,2),
@@ -73,7 +74,7 @@ BEGIN TRANSACTION
         VALUES (@PrestamoID, @MontoPrimerPago, @FechaPrimerPago);
 
         COMMIT TRANSACTION;        
-        PRINT 'El préstamo y el primer pago han sido ingresados correctamente.';
+        PRINT 'El préstamo y el primer pago fueron ingresados correctamente.';
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
@@ -84,7 +85,7 @@ BEGIN TRANSACTION
 END;
 
 
---SP para consultar clientes con los datos de su préstamo y los pagos que ha realizado
+--Procedimiento para consultar clientes con los datos de su préstamo y los pagos que ha realizado
 CREATE PROCEDURE ConsultarClientesPrestamosYPagos
 AS
 BEGIN
